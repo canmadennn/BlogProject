@@ -1,6 +1,7 @@
 ﻿using BlogProject.Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Reflection;
 
 namespace BlogProject.Data.Context;
 
@@ -20,7 +21,14 @@ public class AppDbContext : DbContext
 
     public DbSet<Category> Categories { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
 
-    
+    }
+
+
+
 }
 
